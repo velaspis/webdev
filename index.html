@@ -2,31 +2,26 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>todo list</title>
 </head>
 
 <body>
-
     <div class="parent">
-
-
         <form id="form">
             <ul>
                 <li>
-                    <input id="userinput" name="todo" placeholder="name">
+                    <input id="userinput" name="todo" placeholder="name" />
                 </li>
 
                 <li>
-                    <input type="submit">
+                    <input type="submit" />
                 </li>
                 <li>
-                    <button id="del">
-                            delete
-                        </button>
+                    <button id="del">delete</button>
                 </li>
             </ul>
         </form>
@@ -34,83 +29,84 @@
 
     <div id="todo">
         <main>
-
-            <ul id="list">
-
-            </ul>
+            <ul id="list"></ul>
         </main>
-
     </div>
-    <div role="dialog" id="modal" style="display:none"></div>
+    <div role="dialog" id="modal" style="display: none"></div>
 </body>
 <script>
     function toggleModal(content) {
-        const modal = document.getElementById('modal')
-        modal.innerHTML = content
-        modal.style.display = modal.style.display === 'block' ? 'none' : 'block'
+        const modal = document.getElementById("modal");
+        modal.innerHTML = content;
+        modal.style.display = modal.style.display === "block" ? "none" : "block";
     }
 
-    const arrow = () => {}
-    var text = document.getElementById("userinput")
+    const arrow = () => {};
+    var text = document.getElementById("userinput");
 
     const todo = document.querySelector(".todo ul ");
-    document.querySelectorAll('form').forEach(form => form.addEventListener('submit', e => {
-        e.preventDefault()
-        console.log(e);
+    document.querySelectorAll("form").forEach((form) =>
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log(e);
 
-        const tr = document.getElementById("list")
-        tr.innerHTML.contentEditable = true
+            const tr = document.getElementById("list");
+            tr.innerHTML.contentEditable = true;
 
+            /**
+             *
+             */
+            const data = {};
+            for (const [key, value] of new FormData(e.target).entries()) {
+                console.table({
+                    key,
+                    value,
+                });
+                const td = document.createElement("li");
+                td.innerText = value;
+                tr.appendChild(td);
+                data[key] = value;
+                const moreBtn = document.createElement("button");
+                moreBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    toggleModal(value);
+                });
+                moreBtn.innerText = "more";
+                td.appendChild(moreBtn);
+            }
 
-        /**
-         * 
-         */
-        const data = {}
-        for (const [key, value] of(new FormData(e.target)).entries()) {
-            console.table({
-                key,
-                value
-            });
-            const td = document.createElement("li");
-            td.innerText = value
-            tr.appendChild(td)
-            data[key] = value
-            const moreBtn = document.createElement("button");
-            moreBtn.addEventListener('click', e => {
-                e.preventDefault()
-                toggleModal(value)
-            })
-            moreBtn.innerText = "more"
-            td.appendChild(moreBtn)
-        }
+            window.dispatchEvent(
+                new CustomEvent("myevent", {
+                    detail: data,
+                })
+            );
 
-        window.dispatchEvent(new CustomEvent('myevent', {
-            detail: data
-        }))
+            // special
+        })
+    );
 
-        // special
-
-    }))
-
-    window.addEventListener('myevent', ({
+    window.addEventListener("myevent", ({
         detail
     }) => {
         console.log(detail);
         //...
-    })
-
+    });
 
     function callDone(e) {
-        e.target.style.backgroundColor = "white"
+        e.target.style.backgroundColor = "white";
     }
 
     function del(e) {
-        console.log(e.path)
+        console.log(e.path);
         const parent = document.getElementById("tr");
         parent.remove();
     }
 
-    window.alldel = () => document.getElementById("list").querySelectorAll('tr').forEach((tr, index) => index && tr.remove())
+    window.alldel = () =>
+        document
+        .getElementById("list")
+        .querySelectorAll("tr")
+        .forEach((tr, index) => index && tr.remove());
 </script>
 
 </html>
