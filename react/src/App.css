@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container h1 {
+  display: flex;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  margin: 2px;
+}
+.submit {
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 10px;
+  margin: 2px;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.listed-items {
+  height: 1000px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.created-items {
+  display: flex;
+  text-decoration: none;
+  list-style: none;
+  flex-direction: column;
+  height: 15%;
+  width: 15%;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 6px;
+  margin: 10px;
+}
+
+.openModalBtn {
+  width: 40%;
+}
+.title {
+  justify-content: flex-start;
+  width: 30%;
+}
+.note {
+}
+.title1 {
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 10px;
+  margin: 2px;
+}
+.note1 {
+  width: 800px;
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 10px;
+  margin: 2px;
+}
+.note {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75ch;
+}
