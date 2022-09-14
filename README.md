@@ -27,4 +27,4 @@ Make your changes and commit them to your branch.
 Push your branch to your forked repository.
 Open a pull request from your branch to the main branch of the webdev repository.
 License
-The webdev project is licensed under the MIT License. See the LICENSE file for more information.
+The webdev project is licensed under the MIT License. See the LICENSE file for more information
